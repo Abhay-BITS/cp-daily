@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ArrowRight, Check, Clock, RotateCcw, Share2, Timer } from 'lucide-react'
+import { ArrowRight, Check, Clock, RotateCcw, Share2 } from 'lucide-react'
 import { GAMES, MAX_POINTS } from '../data/games'
 
 const COVER_SNIPPETS = [
@@ -35,7 +35,7 @@ function Tag({ children }) {
   )
 }
 
-function Cover({ dayNumber, done, todayScore, onShare }) {
+function Cover({ dayNumber, done, todayScore, onShare, today, countdown }) {
   const total = GAMES.length * MAX_POINTS
   const perfect = done === GAMES.length
   return (
@@ -64,9 +64,12 @@ function Cover({ dayNumber, done, todayScore, onShare }) {
       ))}
 
       <div className="relative p-6 sm:p-8 md:max-w-[62%]">
-        <span className="inline-block px-3 py-1 rounded-full bg-[#3DDC97] text-brand-navy text-xs font-bold tracking-wide font-display">
-          CP DAILY #{dayNumber}
-        </span>
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+          <span className="inline-block px-3 py-1 rounded-full bg-[#3DDC97] text-brand-navy text-xs font-bold tracking-wide font-display">
+            CP DAILY #{dayNumber}
+          </span>
+          <span className="text-xs text-white/70">{today}</span>
+        </div>
         <h1 className="mt-4 font-display font-bold text-3xl sm:text-4xl leading-tight">
           {perfect ? 'Perfect day. See you tomorrow.' : "Today's Mental Gym"}
         </h1>
@@ -86,6 +89,10 @@ function Cover({ dayNumber, done, todayScore, onShare }) {
               <span className="font-mono text-white font-semibold">{todayScore}</span>/{total} pts
             </p>
           </div>
+          <p className="inline-flex items-center gap-1.5 text-xs text-white/70">
+            <RotateCcw className="w-3.5 h-3.5" />
+            Resets in <span className="font-mono text-white">{countdown}</span>
+          </p>
           {done > 0 && (
             <button
               onClick={onShare}
@@ -148,28 +155,7 @@ export default function GameHub({ dayNumber, results, todayScore, onGameSelect, 
 
   return (
     <div className="animate-fade-in">
-      <Cover dayNumber={dayNumber} done={done} todayScore={todayScore} onShare={onShare} />
-
-      <p className="mt-3 text-sm text-t-secondary">
-        A 5-minute warm-up before you open Codeforces: estimate complexity, catch classic bugs, recognise patterns and recall concepts.
-      </p>
-      <div className="flex flex-wrap gap-2 mt-4">
-        {['time complexity', 'debugging', 'pattern recognition', 'concept recall'].map((t) => <Tag key={t}>{t}</Tag>)}
-      </div>
-
-      <div className="flex flex-wrap items-center justify-between gap-3 mt-5 py-4 border-y border-b-secondary">
-        <div className="flex items-center gap-3">
-          <img src="/tle-logo.svg" alt="" className="w-10 h-10 rounded-full" />
-          <div>
-            <p className="text-sm text-t-secondary">TLE Eliminators</p>
-            <p className="text-xs text-t-tertiary">Day #{dayNumber} &middot; {today}</p>
-          </div>
-        </div>
-        <div className="flex items-center gap-4 text-sm text-t-tertiary">
-          <span className="inline-flex items-center gap-1.5"><Timer className="w-4 h-4" />5 mins</span>
-          <span className="inline-flex items-center gap-1.5"><RotateCcw className="w-4 h-4" />Resets in <span className="font-mono text-t-secondary">{countdown}</span></span>
-        </div>
-      </div>
+      <Cover dayNumber={dayNumber} done={done} todayScore={todayScore} onShare={onShare} today={today} countdown={countdown} />
 
       <h2 className="mt-8 mb-5 pb-3 text-2xl font-semibold text-t-primary border-b border-b-secondary">Today's Lineup</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
