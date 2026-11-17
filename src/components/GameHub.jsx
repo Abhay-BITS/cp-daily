@@ -65,7 +65,7 @@ function Cover({ dayNumber, done, todayScore, onShare, today }) {
 
       <div className="relative p-6 sm:p-8 md:max-w-[62%]">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-          <span className="inline-block px-3 py-1 rounded-full bg-[#3DDC97] text-brand-navy text-xs font-bold tracking-wide font-display">
+          <span className="inline-block px-3 py-1 rounded-full bg-[#3DDC97] text-brand-blue-navy text-xs font-bold tracking-wide font-display">
             CP DAILY #{dayNumber}
           </span>
           <span className="text-xs text-white/70">{today}</span>
@@ -92,7 +92,7 @@ function Cover({ dayNumber, done, todayScore, onShare, today }) {
           {done > 0 && (
             <button
               onClick={onShare}
-              className="inline-flex items-center gap-1.5 h-[30px] px-3 rounded bg-white text-brand-navy text-xs font-semibold hover:bg-white/90 transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 h-[30px] px-3 rounded bg-white text-brand-blue-navy text-xs font-semibold hover:bg-white/90 transition-colors cursor-pointer"
             >
               <Share2 className="w-3.5 h-3.5" />
               Share scorecard

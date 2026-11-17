@@ -56,7 +56,7 @@ export default function ShareModal({ isOpen, onClose, results, todayScore, strea
           <button onClick={onClose} aria-label="Close" className="absolute top-4 right-4 text-white/70 hover:text-white cursor-pointer">
             <X className="w-5 h-5" />
           </button>
-          <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#3DDC97] text-brand-navy text-[11px] font-bold font-display">CP DAILY #{dayNumber}</span>
+          <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#3DDC97] text-brand-blue-navy text-[11px] font-bold font-display">CP DAILY #{dayNumber}</span>
           <p className="mt-3 font-mono text-4xl font-bold">{todayScore}<span className="text-white/50 text-2xl">/{total}</span></p>
           <p className="mt-1 text-sm text-white/75 inline-flex items-center gap-1.5">
             {done}/{GAMES.length} games
