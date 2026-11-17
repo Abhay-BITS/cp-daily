@@ -35,7 +35,7 @@ function Tag({ children }) {
   )
 }
 
-function Cover({ dayNumber, done, todayScore, onShare, today, countdown }) {
+function Cover({ dayNumber, done, todayScore, onShare, today }) {
   const total = GAMES.length * MAX_POINTS
   const perfect = done === GAMES.length
   return (
@@ -89,10 +89,6 @@ function Cover({ dayNumber, done, todayScore, onShare, today, countdown }) {
               <span className="font-mono text-white font-semibold">{todayScore}</span>/{total} pts
             </p>
           </div>
-          <p className="inline-flex items-center gap-1.5 text-xs text-white/70">
-            <RotateCcw className="w-3.5 h-3.5" />
-            Resets in <span className="font-mono text-white">{countdown}</span>
-          </p>
           {done > 0 && (
             <button
               onClick={onShare}
@@ -155,9 +151,15 @@ export default function GameHub({ dayNumber, results, todayScore, onGameSelect, 
 
   return (
     <div className="animate-fade-in">
-      <Cover dayNumber={dayNumber} done={done} todayScore={todayScore} onShare={onShare} today={today} countdown={countdown} />
+      <Cover dayNumber={dayNumber} done={done} todayScore={todayScore} onShare={onShare} today={today} />
 
-      <h2 className="mt-8 mb-5 pb-3 text-2xl font-semibold text-t-primary border-b border-b-secondary">Today's Lineup</h2>
+      <div className="mt-8 mb-5 pb-3 flex flex-wrap items-end justify-between gap-x-4 gap-y-1 border-b border-b-secondary">
+        <h2 className="text-2xl font-semibold text-t-primary">Today's Lineup</h2>
+        <p className="inline-flex items-center gap-1.5 pb-1 text-sm text-t-tertiary">
+          <RotateCcw className="w-4 h-4" />
+          Resets in <span className="font-mono text-t-secondary">{countdown}</span>
+        </p>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {GAMES.map((g, i) => (
           <GameCard key={g.id} game={g} index={i} result={results[g.id]} onPlay={() => onGameSelect(g.id)} />
