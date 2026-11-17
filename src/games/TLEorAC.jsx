@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import { tleOrAcCards } from '../data/gameData'
 import { Check, X, Clock, Keyboard, RotateCcw } from 'lucide-react'
 import { MAX_POINTS } from '../data/games'
+import MathText from '../components/MathText'
 
 const TIMER_DURATION = 6000
 const FEEDBACK_DURATION = 2600
@@ -190,13 +191,13 @@ export default function TLEorAC({ onComplete }) {
                 </span>
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-2 mb-1">
-                    <span className="text-sm text-t-primary">{c.approach}</span>
+                    <span className="text-sm text-t-primary"><MathText text={c.approach} /></span>
                     <span className={`text-[11px] font-mono font-semibold px-1.5 py-0.5 rounded ${c.answer === 'TLE' ? 'bg-semantic-red-bg text-semantic-red' : 'bg-semantic-green-bg text-semantic-green'}`}>{c.answer}</span>
                     {!a.correct && (
                       <span className="text-[11px] text-t-tertiary">you: {a.guess === 'TIMEOUT' ? 'timed out' : a.guess}</span>
                     )}
                   </div>
-                  <p className="text-xs text-t-tertiary leading-relaxed">{c.explanation}</p>
+                  <p className="text-xs text-t-tertiary leading-relaxed"><MathText text={c.explanation} /></p>
                 </div>
               </div>
             )
@@ -236,9 +237,9 @@ export default function TLEorAC({ onComplete }) {
 
       <div key={round} className="rounded-tle-lg border border-b-secondary bg-[var(--tle-code-bg)] p-5 sm:p-6 mb-5 animate-slide-up">
         <p className="text-xs font-semibold uppercase tracking-wider text-t-tertiary mb-1.5">Constraints</p>
-        <p className="font-mono text-sm text-brand-blue mb-5">{card.constraints}</p>
+        <p className="font-mono text-sm text-brand-blue mb-5"><MathText text={card.constraints} /></p>
         <p className="text-xs font-semibold uppercase tracking-wider text-t-tertiary mb-1.5">Proposed approach</p>
-        <p className="text-lg text-t-primary">{card.approach}</p>
+        <p className="text-lg text-t-primary"><MathText text={card.approach} /></p>
       </div>
 
       {phase === 'playing' && (
@@ -263,7 +264,7 @@ export default function TLEorAC({ onComplete }) {
             {lastAnswer.correct ? 'Correct.' : lastAnswer.guess === 'TIMEOUT' ? "Time's up." : 'Wrong call.'}
             <span className="font-mono text-sm opacity-80">Verdict: {card.answer}</span>
           </p>
-          <p className="text-sm text-t-secondary">{card.explanation}</p>
+          <p className="text-sm text-t-secondary"><MathText text={card.explanation} /></p>
         </div>
       )}
     </div>

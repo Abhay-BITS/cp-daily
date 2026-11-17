@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { topicPuzzles } from '../data/gameData'
 import { Check, X, Lock, Eye, ArrowUpRight } from 'lucide-react'
+import MathText from '../components/MathText'
 
 const POINTS = [100, 70, 40]
 
@@ -75,7 +76,7 @@ export default function GuessTopic({ onComplete }) {
                 {i + 1}
               </span>
               {revealed ? (
-                <p className="text-sm text-t-primary font-mono leading-relaxed">{clue}</p>
+                <p className="text-sm text-t-primary font-mono leading-relaxed"><MathText text={clue} /></p>
               ) : (
                 <p className="text-sm text-t-tertiary inline-flex items-center gap-2"><Lock className="w-3.5 h-3.5" />Locked clue</p>
               )}
@@ -132,7 +133,7 @@ export default function GuessTopic({ onComplete }) {
             <span className="font-mono text-sm text-t-secondary">+{points(state)} pts</span>
           </div>
           <p className="text-sm text-t-secondary leading-relaxed">
-            <span className="font-semibold text-t-primary">{puzzle.answer}.</span> {puzzle.explanation}
+            <span className="font-semibold text-t-primary">{puzzle.answer}.</span> <MathText text={puzzle.explanation} />
           </p>
           <div className="mt-3 flex flex-wrap gap-4">
             {nextOpen !== -1 && (

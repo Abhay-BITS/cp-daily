@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { wordleWords } from '../data/gameData'
 import { Check, X, Delete, ArrowUpRight } from 'lucide-react'
+import MathText from '../components/MathText'
 
 const KEYBOARD_ROWS = [
   ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
@@ -242,7 +243,7 @@ export default function CPWordle({ onComplete }) {
               </div>
               <p className="text-t-secondary text-sm leading-relaxed">
                 <span className="text-brand-blue font-semibold font-mono">{answer}</span>
-                : {wordData.definition}
+                : <MathText text={wordData.definition} />
               </p>
             </>
           ) : (
@@ -254,7 +255,7 @@ export default function CPWordle({ onComplete }) {
               <p className="text-t-secondary text-sm leading-relaxed">
                 The word was{' '}
                 <span className="text-brand-blue font-semibold font-mono">{answer}</span>
-                : {wordData.definition}
+                : <MathText text={wordData.definition} />
               </p>
             </>
           )}

@@ -2,6 +2,7 @@ import { useState, useCallback, useRef, useEffect } from 'react'
 import { debugSnippets } from '../data/gameData'
 import { Heart, Check, X, MousePointerClick } from 'lucide-react'
 import { MAX_POINTS } from '../data/games'
+import MathText from '../components/MathText'
 
 const KEYWORDS = new Set([
   'int', 'for', 'if', 'return', 'using', 'namespace', 'void', 'while',
@@ -163,7 +164,7 @@ export default function DebugCode({ onComplete }) {
       <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
         <div>
           <h3 className="text-lg font-semibold text-t-primary">{snippet.title}</h3>
-          <p className="font-mono text-sm text-brand-blue mt-0.5">{snippet.constraint}</p>
+          <p className="font-mono text-sm text-brand-blue mt-0.5"><MathText text={snippet.constraint} /></p>
         </div>
         <div className="flex items-center gap-1" aria-label={`${remainingAttempts} lives left`}>
           {Array.from({ length: MAX_ATTEMPTS }).map((_, i) => (
@@ -197,7 +198,7 @@ export default function DebugCode({ onComplete }) {
             </span>
             <span className="font-mono text-sm text-t-secondary">+{snippetPoints(state)} pts</span>
           </div>
-          <p className="text-sm text-t-secondary leading-relaxed">{snippet.explanation}</p>
+          <p className="text-sm text-t-secondary leading-relaxed"><MathText text={snippet.explanation} /></p>
           {nextUnresolved !== -1 && (
             <button onClick={() => setActiveSnippet(nextUnresolved)} className="mt-3 text-sm font-medium text-brand-blue hover:underline cursor-pointer">
               Next snippet
